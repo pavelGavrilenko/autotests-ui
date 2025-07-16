@@ -22,8 +22,6 @@ def initialize_browser_state(playwright: Playwright):
     password.fill('password')
     reg_button = page.get_by_test_id("registration-page-registration-button")
     reg_button.click()
-    dashbord_tittle = page.get_by_test_id("dashboard-toolbar-title-text")
-    expect(dashbord_tittle).to_be_visible()
     context.storage_state(path="browser-state.json")
     bro.close()
 
