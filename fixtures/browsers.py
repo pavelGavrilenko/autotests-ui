@@ -26,7 +26,7 @@ def initialize_browser_state(playwright: Playwright):
     bro.close()
 
 
-@pytest.fixture(autouse=True)
+@pytest.fixture
 def chromium_page_with_state(initialize_browser_state, playwright: Playwright):
     bro = playwright.chromium.launch(headless=False)
     contex = bro.new_context(storage_state="browser-state.json")
