@@ -61,21 +61,19 @@ jobs:
             name: my-artifact
             path: allure-results
 
+  publish-report:
+    runs-on: ubuntu-latest
 
-  jobs:
-    publish-report:
-      runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v5
+        with:
+          name: allure-results
+          path: allure-results
 
-      steps:
-        - uses: actions/download-artifact@v5
-          with:
-            name: allure-results
-            path: allure-results
-
-        - name: Deploy report to Github Pages
-          if: always()
-          uses: peaceiris/actions-gh-pages@v4
-          with:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-            publish_branch: gh-pages
-            publish_dir: allure-history
+      - name: Deploy report to Github Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
